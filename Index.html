@@ -1,0 +1,152 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+    
+    <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/Style.css">
+    
+    <script type="text/javascript">
+      window.onload=function(){
+         setTimeout("switchImage()", 3000);
+     }
+     var current = 0;
+     var numIMG = 9;
+     function switchImage(){
+        
+        current++;
+				document.images['Animation'].src='images/Animation' + current + '.jpg'; // images 変わる
+				
+				if(current == numIMG){current = 0}
+                    
+                    setTimeout("switchImage()", 3000);				
+            }
+        </script>
+        <base href="/">
+    </head>
+    <body>
+    	<p style="text-align:right; margin-right:20px;">受付9-18時(日祝日10-18時) <a href="#">お問い合わせ</a> <a href="#">アクセス</a> お電話注文は 012-345-6789</p>
+        <div id="banner">
+          <img src="images/aoyama-hanamo-logo_2x2.png" width="340" height="100">
+          <div id="banner-Icon">
+            <div class="social-icon">
+                <a href="#"><img src="images/facebook.png" name="face"></a>
+                <a href="#"><img src="images/twitter.png" name="twitter"></a>  
+                <a href="#"><img src="images/email.png" name="email"></a>
+            </div>
+            <p><span><a href="SignUpForm.html">新規会員登録</a></span>  <span><a href="LoginForm.html">ログイン</a></span>  <span><a href="#">クーポン情報</a></span>  <span><a href="http://localhost:3000/Cart">カート<img alt="cart" src="images/cart.jpg" width="40" height="40"></a></span></p>
+        </div>
+        
+    </div>
+    
+    <div id="menu_top">
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">PRODUCT</a>
+               <ul id="submenu">
+                   <li><a href="#">Rose</a></li>
+                   <li><a href="#">Carnation</a></li>
+                   <li><a href="#">Gerbera</a></li>
+                   <li><a href="#">Lily</a></li>
+               </ul>
+           </li>
+           <li><a href="#">NEWS</a></li>
+           <li><a href="Blog.html">BLOG</a></li>
+           <li><a href="#">CONTACT</a></li>
+       </ul>
+       <input type="text" value=""><a class="Search" href="#">SEARCH</a></input>
+   </div>      
+   
+   
+   <div id="layout_content">
+    
+       <div id="Animation">
+           <img name="Animation" src="/images/Animation1.jpg" width="880"/>
+       </div>
+       <div id="content_left">
+           
+        
+           <div class="r-item1"><a href="#"></a>
+            
+               <img width="250" src="#" alt="Item1">
+               <p><a href="#">胡蝶蘭（大輪 ３本立ち）</a></p>
+               <p>販売価格32,400円(税込)</p>
+               <button id="product-1" data-name="胡蝶蘭（大輪 ３本立ち）" data-price="32400" class="add-to-cart btn btn-primary">カートに入れる</button>
+           </div>
+           <div class="r-item1"><a href="#"></a>
+               <img width="250" src="336_thumbnail.jpg" alt="Item2">
+               <p><a href="#">胡蝶蘭（大輪 ３本立ち）</a></p>
+               <p>販売価格32,400円(税込)</p>
+               <button id="product-1" data-name="赤バラの花束（大輪・２８本）" data-price="21600" class="add-to-cart btn btn-primary">カートに入れる</button>
+           </div>
+           <div class="r-item1"><a href="#"></a>
+               <img width="250" src="images/164_thumbnail.jpg" alt="Item3">
+               <p><a href="#">胡蝶蘭（大輪 ３本立ち）</a></p>
+               <p>販売価格32,400円(税込)</p>
+               <button id="product-1" data-name="赤バラの花束（大輪・２８本）" data-price="21600" class="add-to-cart btn btn-primary">カートに入れる</button>
+           </div>
+           <div class="r-item1"><a href="#"></a>
+               <img width="250" src="images/338_thumbnail.jpg" alt="Item4">
+               <p><a href="#">胡蝶蘭（大輪 ３本立ち）</a></p>
+               <p>販売価格32,400円(税込)</p>
+               <button id="product-1" data-name="赤バラの花束（大輪・２８本）" data-price="21600" class="add-to-cart btn btn-primary">カートに入れる</button>
+           </div>
+           <div class="r-item1"><a href="#"></a>
+               <img width="250" src="images/473_thumbnail.jpg" alt="Item5">
+               <p><a href="#">胡蝶蘭（大輪 ３本立ち）</a></p>
+               <p>販売価格32,400円(税込)</p>
+               <button id="product-1" data-name="赤バラの花束（大輪・２８本）" data-price="21600" class="add-to-cart btn btn-primary">カートに入れる</button>
+           </div>
+           <div class="r-item1"><a href="#"></a>
+               <img width="250" src="images/613_thumbnail.jpg" alt="Item6">
+               <p><a href="#">胡蝶蘭（大輪 ３本立ち）</a></p>
+               <p>販売価格32,400円(税込)</p>
+               <button id="product-1" data-name="赤バラの花束（大輪・２８本）" data-price="21600" class="add-to-cart btn btn-primary">カートに入れる</button>
+           </div>
+           <div class="r-item1"><a href="#"></a>
+               <img width="250" src="images/1352_thumbnail.jpg" alt="Item7">
+               <p><a href="#">胡蝶蘭（大輪 ３本立ち）</a></p>
+               <p>販売価格32,400円(税込)</p>
+               <button id="product-1" data-name="赤バラの花束（大輪・２８本）" data-price="21600" class="add-to-cart btn btn-primary">カートに入れる</button>
+           </div>
+           <div class="r-item1"><a href="#"></a>
+               <img width="250" src="images/1570_thumbnail.jpg" alt="Item8">
+               <p><a href="#">胡蝶蘭（大輪 ３本立ち</a></p>
+               <p>販売価格32,400円(税込)</p>
+               <button id="product-1" data-name="赤バラの花束（大輪・２８本）" data-price="21600" class="add-to-cart btn btn-primary">カートに入れる</button>
+           </div>
+           <div class="r-item1"><a href="#"></a>
+               <img width="250" src="images/1663_thumbnail.jpg" alt="Item9">
+               <p><a href="#">胡蝶蘭（大輪 ３本立ち）</a></p>
+               <p>販売価格32,400円(税込)</p>
+               <button id="product-1" data-name="赤バラの花束（大輪・２８本）" data-price="21600" class="add-to-cart btn btn-primary">カートに入れる</button>
+               
+           </div>
+       </div>
+       
+       <div id="content_right">
+           <h3>FAMOUS LIST</h3>
+           <ul id="r-famous">
+               <li><a href="#">Rose</a></li>
+               <li><a href="#">Carnation</a></li>
+               <li><a href="#">Gerbera</a></li>
+               <li><a href="#">Lily</a></li>
+               <li><a href="#">...</a></li>
+           </ul>
+       </div>
+       <br class="clearboth"/>
+       
+   </div>
+   
+   
+   <div id="footer">
+    <img src="images/smartphone-aoyama-hanamo-footer-logo_2x2.png" width="240" height="290" >
+    <p>会社概要  ABC  特定商取引法に基づく表示<br>
+        Copyright © 2017  Florist Mien Co.,Ltd. All rights Reserved.</p>
+    </div>       
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SHOPPING CART</title>
+    <meta charset='utf-8'>
+    <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        .wrapper {
+            width: 1140px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+    	<br>
+        <h1><B>ショッピングカート</B></h1>
+        <hr><br>
+        <div class="row">
+            <div class="col-md-4">
+                <% array.forEach(function(item){ %>
+                
+                <div class="r-item1">
+                    <img width="250" src="upload/<%= item.image %>" alt="Item1">
+                    <p><a href="#"><%= item.name %></a></p>
+                    <p>販売価格<%= item.price %>円(税込)</p>
+                    <button id="product-1" data-name="<%= item.name %>" data-price="<%= item.price %>" class="add-to-cart btn btn-primary">カートに入れる</button>
+                </div>
+                
+                <% }); %> 
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <table class="table table-bordered" id="table-products">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th width=680>商品名</th>
+                        <th>単価(税込) (円)</th>
+                        <th>数量 (束)</th>
+                        <th>小計 (円)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div>
+            <button class="btn btn-lg btn-danger" id="button-clear">取消</button>
+        </div>
+        <div class="text-right">
+
+            <hr />
+            <address>
+                TRAN HUU MIEN COLLECTION HONTEN - 2017
+            </address>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    // Định nghĩa một mảng các phần tử sẽ bỏ vào giỏ hàng
+    var shoppingCartItems = [];
+
+    $(document).ready(function () {
+        // Kiểm tra nếu đã có sessionStorage["shopping-cart-items"] hay chưa?
+        if (sessionStorage["shopping-cart-items"] != null) {
+            shoppingCartItems = JSON.parse(sessionStorage["shopping-cart-items"].toString());
+        }
+
+        // Hiển thị thông tin từ giỏ hàng
+        displayShoppingCartItems();
+    });
+
+
+    // Sự kiện click các button có class=".add-to-cart"
+    $(".add-to-cart").click(function () {
+        var button = $(this); // Lấy đối tượng button mà người dùng click
+        var id = button.attr("id"); // id của sản phẩm là id của button
+        var name = button.attr("data-name"); // name của sản phẩm là thuộc tính data-name của button
+        var price = button.attr("data-price"); // price của sản phẩm là thuộc tính data-price của button
+        var quantity = 1; // Số lượng
+
+
+        var item = {
+            id: id,
+            name: name,
+            price: price,
+            quantity: quantity
+        };
+
+        var exists = false;
+        if (shoppingCartItems.length > 0) {
+            $.each(shoppingCartItems, function (index, value) {
+                // Nếu mặt hàng đã tồn tại trong giỏ hàng thì chỉ cần tăng số lượng mặt hàng đó trong giỏ hàng.
+                if (value.id == item.id) {
+                    value.quantity++;
+                    exists = true;
+                    return false;
+                }
+            });
+        }
+
+        // Nếu mặt hàng chưa tồn tại trong giỏ hàng thì bổ sung vào mảng
+        if (!exists) {
+            shoppingCartItems.push(item);
+        }
+
+        // Lưu thông tin vào sessionStorage
+        sessionStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems); // Chuyển thông tin mảng shoppingCartItems sang JSON trước khi lưu vào sessionStorage
+        // Gọi hàm hiển thị giỏ hàng
+        displayShoppingCartItems();
+    });
+
+    // Xóa hết giỏ hàng shoppingCartItems
+    $("#button-clear").click(function () {
+
+        shoppingCartItems = [];
+        sessionStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
+        $("#table-products > tbody").html("");
+    });
+
+    // Xóa 1 truong trong giỏ hàng shoppingCartItems
+    function delRow(elem) {
+        
+        item = getItemById($(elem).attr("product-id"));
+        var i= shoppingCartItems.indexOf(item);
+        shoppingCartItems.splice(i,1);
+        sessionStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
+        displayShoppingCartItems();
+    };
+
+
+    // Hiển thị giỏ hàng ra table
+    function displayShoppingCartItems() {
+        if (sessionStorage["shopping-cart-items"] != null) {
+            shoppingCartItems = JSON.parse(sessionStorage["shopping-cart-items"].toString()); // Chuyển thông tin từ JSON trong sessionStorage sang mảng shoppingCartItems.
+
+            $("#table-products > tbody").html("");
+            // Duyệt qua mảng shoppingCartItems để append từng item dòng vào table
+            $.each(shoppingCartItems, function (index, item) {
+                var htmlString = "";
+                htmlString += "<tr>";
+                htmlString += "<td>" + item.id + "</td>";
+                htmlString += "<td>" + item.name + "</td>";
+                htmlString += "<td style='text-align: right'>" + item.price + "</td>";
+                htmlString += "<td style='text-align: center'>" + "<input id='qtyItem' style='width:50px; text-align:center' product-id='" + item.id + "' value='"+item.quantity+"' onchange='updateQuantity(this)' >"+"</input>"+"</td>";
+                
+                htmlString += "<td style='text-align: right'>" +item.price * item.quantity + "</td>";
+                
+                htmlString += "<td style='text-align: center; border-color:#fff'>"+"<button id='button-del' product-id='" + item.id + "' onClick='delRow(this)' class='btn btn-danger'>Delete</button>"+"</td>";
+                
+                htmlString += "</tr>";
+                
+                $("#table-products > tbody:last").append(htmlString);
+
+
+
+            });
+
+        }
+    }
+
+    function getItemById(id) {
+        var matchedItem = null;
+        $.each(shoppingCartItems, function (index, item) {
+            if (id == item.id)
+                matchedItem = item;
+        });
+        return matchedItem;
+    }
+
+    function updateQuantity(elem) {
+
+        item = getItemById($(elem).attr("product-id"));
+        item.quantity=elem.value;
+        if(item.quantity>100){
+            alert("数量が多すぎる。１００以下入力して下さい　！");
+        }else
+        if(item.quantity<0){
+            alert("ごめんなさい、当店はお花を買い取らないです。　０から１００まで入力して下さい　！");
+        }else{               
+            sessionStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
+            displayShoppingCartItems();
+        }
+    }
+
+
+
+</script>
